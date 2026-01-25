@@ -1,8 +1,13 @@
-# Welcome to your Lovable project
+# GRC Audit Shield
 
-## Project info
+![Tests](https://img.shields.io/badge/tests-14%20passed-brightgreen)
+![React](https://img.shields.io/badge/react-18.3-blue)
+![TypeScript](https://img.shields.io/badge/typescript-5.8-blue)
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Project Info
+
+A comprehensive Governance, Risk, and Compliance (GRC) audit platform built with React, TypeScript, and Vite.
+
 
 ## How can I edit this code?
 
