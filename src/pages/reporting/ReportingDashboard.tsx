@@ -1,17 +1,20 @@
 
 import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, BarChart3, PieChart, Download } from "lucide-react";
-
-
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { FileText, Shield, TrendingUp } from "lucide-react";
 
 import AIInsightsPanel from "@/components/reporting/AIInsightsPanel";
 import { QuickActions } from "@/components/reporting/QuickActions";
 import { ReportTemplates } from "@/components/reporting/ReportTemplates";
-
-
+import { ComplianceTrendsChart } from "@/components/reporting/ComplianceTrendsChart";
+import { RiskVelocityChart } from "@/components/reporting/RiskVelocityChart";
+import { VulnerabilityMetricsChart } from "@/components/reporting/VulnerabilityMetricsChart";
+import { ControlEffectivenessChart } from "@/components/reporting/ControlEffectivenessChart";
+import { RiskAgingChart } from "@/components/reporting/RiskAgingChart";
+import { SecurityPostureScore } from "@/components/reporting/SecurityPostureScore";
 
 const ReportingDashboard = () => {
     return (
@@ -20,49 +23,66 @@ const ReportingDashboard = () => {
                 {/* Top Section: Quick Actions */}
                 <QuickActions />
 
+                {/* Security Reports Quick Access */}
+                <Card className="glass-card border-primary/20">
+                    <CardHeader>
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <Shield className="h-5 w-5 text-primary" />
+                                <CardTitle className="text-lg">Security & Compliance Reports</CardTitle>
+                            </div>
+                            <Link to="/reporting/security-reports">
+                                <Button variant="outline" size="sm">
+                                    <FileText className="mr-2 h-4 w-4" />
+                                    View All Reports
+                                </Button>
+                            </Link>
+                        </div>
+                        <CardDescription>
+                            Industry-standard reports: SOC 2, ISO 27001, NIST CSF, PCI-DSS
+                        </CardDescription>
+                    </CardHeader>
+                </Card>
+
                 {/* Report Templates Gallery */}
                 <ReportTemplates />
 
                 {/* Analytics Dashboard */}
                 <section>
-                    <Tabs defaultValue="compliance" className="w-full">
-                        <TabsList className="mb-4">
-                            <TabsTrigger value="compliance">Compliance Trends</TabsTrigger>
-                            <TabsTrigger value="risk">Risk Analytics</TabsTrigger>
-                            <TabsTrigger value="vuln">Vulnerability Metrics</TabsTrigger>
-                            <TabsTrigger value="controls">Control Effectiveness</TabsTrigger>
+                    <Tabs defaultValue="posture" className="w-full">
+                        <TabsList className="mb-4 grid grid-cols-3 lg:grid-cols-6 h-auto">
+                            <TabsTrigger value="posture" className="py-2">Security Posture</TabsTrigger>
+                            <TabsTrigger value="compliance" className="py-2">Compliance</TabsTrigger>
+                            <TabsTrigger value="risk" className="py-2">Risk Analytics</TabsTrigger>
+                            <TabsTrigger value="aging" className="py-2">Risk Aging</TabsTrigger>
+                            <TabsTrigger value="vuln" className="py-2">Vulnerabilities</TabsTrigger>
+                            <TabsTrigger value="controls" className="py-2">Controls</TabsTrigger>
                         </TabsList>
+
+                        <TabsContent value="posture" className="space-y-4">
+                            <SecurityPostureScore />
+                        </TabsContent>
 
                         <TabsContent value="compliance" className="space-y-4">
                             <ComplianceTrendsChart />
                         </TabsContent>
 
                         <TabsContent value="risk" className="space-y-4">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 gap-4">
                                 <RiskVelocityChart />
-                                {/* Placeholder for Risk Aging or other charts */}
-                                <Card className="flex items-center justify-center bg-muted/20">
-                                    <div className="text-center p-8">
-                                        <PieChart className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
-                                        <h3 className="text-lg font-medium text-muted-foreground">Risk Aging Analysis</h3>
-                                        <p className="text-sm text-muted-foreground">Chart loading...</p>
-                                    </div>
-                                </Card>
                             </div>
                         </TabsContent>
 
-                        {/* Additional tabs (vuln, controls) would go here similarly */}
-                        <TabsContent value="vuln">
-                            <div className="p-12 text-center border rounded-lg border-dashed">
-                                <h3 className="text-lg font-medium">Vulnerability Metrics</h3>
-                                <p className="text-muted-foreground">MTTR and Severity distribution charts will appear here.</p>
-                            </div>
+                        <TabsContent value="aging" className="space-y-4">
+                            <RiskAgingChart />
                         </TabsContent>
-                        <TabsContent value="controls">
-                            <div className="p-12 text-center border rounded-lg border-dashed">
-                                <h3 className="text-lg font-medium">Control Effectiveness</h3>
-                                <p className="text-muted-foreground">Heatmap and pass/fail rates will appear here.</p>
-                            </div>
+
+                        <TabsContent value="vuln" className="space-y-4">
+                            <VulnerabilityMetricsChart />
+                        </TabsContent>
+
+                        <TabsContent value="controls" className="space-y-4">
+                            <ControlEffectivenessChart />
                         </TabsContent>
                     </Tabs>
                 </section>

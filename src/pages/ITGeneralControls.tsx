@@ -572,34 +572,440 @@ const ITGeneralControls = () => {
 
           {/* Computer Operations Tab */}
           <TabsContent value="computer-operations" className="space-y-6">
+            {/* Stats Cards */}
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <Card className="glass-card">
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">System Uptime</CardTitle>
+                  <TrendingUp className="h-5 w-5 text-success" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-success">99.97%</div>
+                  <p className="text-xs text-muted-foreground mt-1">Last 30 days</p>
+                </CardContent>
+              </Card>
+
+              <Card className="glass-card">
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">Batch Jobs Today</CardTitle>
+                  <Settings className="h-5 w-5 text-primary" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">142</div>
+                  <p className="text-xs text-success mt-1">138 successful, 4 failed</p>
+                </CardContent>
+              </Card>
+
+              <Card className="glass-card">
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">Last Backup</CardTitle>
+                  <CheckCircle2 className="h-5 w-5 text-success" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">2h ago</div>
+                  <p className="text-xs text-muted-foreground mt-1">Full backup completed</p>
+                </CardContent>
+              </Card>
+
+              <Card className="glass-card border-warning/30">
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">Pending Jobs</CardTitle>
+                  <Clock className="h-5 w-5 text-warning" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-warning">7</div>
+                  <p className="text-xs text-muted-foreground mt-1">Scheduled for today</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Batch Job Status Table */}
             <Card className="glass-card">
               <CardHeader>
-                <CardTitle>Computer Operations Monitoring</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <Settings className="h-5 w-5 text-primary" />
+                  Batch Job Schedule
+                </CardTitle>
               </CardHeader>
-              <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-                <Settings className="h-16 w-16 text-muted-foreground mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Coming Soon</h3>
-                <p className="text-muted-foreground max-w-md">
-                  Monitor batch job schedules, backup operations, and system availability metrics.
-                </p>
+              <CardContent>
+                <ScrollArea className="h-[300px]">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="hover:bg-transparent">
+                        <TableHead>Job Name</TableHead>
+                        <TableHead>Schedule</TableHead>
+                        <TableHead>Last Run</TableHead>
+                        <TableHead>Duration</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Next Run</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-medium">Financial Data Sync</TableCell>
+                        <TableCell>Every 4 hours</TableCell>
+                        <TableCell className="font-mono text-sm">02:00 AM</TableCell>
+                        <TableCell>12 min</TableCell>
+                        <TableCell>
+                          <Badge className="bg-success">Completed</Badge>
+                        </TableCell>
+                        <TableCell className="text-muted-foreground">06:00 AM</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Database Backup - Production</TableCell>
+                        <TableCell>Daily 2:00 AM</TableCell>
+                        <TableCell className="font-mono text-sm">02:00 AM</TableCell>
+                        <TableCell>45 min</TableCell>
+                        <TableCell>
+                          <Badge className="bg-success">Completed</Badge>
+                        </TableCell>
+                        <TableCell className="text-muted-foreground">Tomorrow 02:00 AM</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Log Rotation</TableCell>
+                        <TableCell>Weekly Sunday</TableCell>
+                        <TableCell className="font-mono text-sm">Jan 19, 03:00 AM</TableCell>
+                        <TableCell>8 min</TableCell>
+                        <TableCell>
+                          <Badge className="bg-success">Completed</Badge>
+                        </TableCell>
+                        <TableCell className="text-muted-foreground">Jan 26, 03:00 AM</TableCell>
+                      </TableRow>
+                      <TableRow className="bg-destructive/5">
+                        <TableCell className="font-medium">Report Generation</TableCell>
+                        <TableCell>Daily 5:00 AM</TableCell>
+                        <TableCell className="font-mono text-sm">05:00 AM</TableCell>
+                        <TableCell>-</TableCell>
+                        <TableCell>
+                          <Badge variant="destructive">Failed</Badge>
+                        </TableCell>
+                        <TableCell className="text-muted-foreground">Tomorrow 05:00 AM</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Security Scan</TableCell>
+                        <TableCell>Daily 1:00 AM</TableCell>
+                        <TableCell className="font-mono text-sm">01:00 AM</TableCell>
+                        <TableCell>32 min</TableCell>
+                        <TableCell>
+                          <Badge className="bg-success">Completed</Badge>
+                        </TableCell>
+                        <TableCell className="text-muted-foreground">Tomorrow 01:00 AM</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </ScrollArea>
               </CardContent>
             </Card>
+
+            {/* System Availability & Backup Status */}
+            <div className="grid gap-6 md:grid-cols-2">
+              <Card className="glass-card">
+                <CardHeader>
+                  <CardTitle>Backup Status</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-success" />
+                      <div>
+                        <p className="font-medium">Production Database</p>
+                        <p className="text-sm text-muted-foreground">Full backup - 24.5 GB</p>
+                      </div>
+                    </div>
+                    <span className="text-sm text-success">2 hours ago</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-success" />
+                      <div>
+                        <p className="font-medium">Application Files</p>
+                        <p className="text-sm text-muted-foreground">Incremental - 1.2 GB</p>
+                      </div>
+                    </div>
+                    <span className="text-sm text-success">4 hours ago</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-success" />
+                      <div>
+                        <p className="font-medium">Configuration Backup</p>
+                        <p className="text-sm text-muted-foreground">Daily - 156 MB</p>
+                      </div>
+                    </div>
+                    <span className="text-sm text-success">6 hours ago</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-warning/10 border border-warning/20">
+                    <div className="flex items-center gap-3">
+                      <AlertTriangle className="h-5 w-5 text-warning" />
+                      <div>
+                        <p className="font-medium">DR Site Replication</p>
+                        <p className="text-sm text-muted-foreground">Sync in progress - 78%</p>
+                      </div>
+                    </div>
+                    <span className="text-sm text-warning">In Progress</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="glass-card">
+                <CardHeader>
+                  <CardTitle>System Availability</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
+                    <div>
+                      <p className="font-medium">SAP ERP</p>
+                      <p className="text-sm text-muted-foreground">Production</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
+                      <span className="text-success font-medium">Online</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
+                    <div>
+                      <p className="font-medium">Oracle Database</p>
+                      <p className="text-sm text-muted-foreground">Primary Node</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
+                      <span className="text-success font-medium">Online</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
+                    <div>
+                      <p className="font-medium">AWS Infrastructure</p>
+                      <p className="text-sm text-muted-foreground">All regions</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
+                      <span className="text-success font-medium">Online</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-warning/10 border border-warning/20">
+                    <div>
+                      <p className="font-medium">Legacy Mainframe</p>
+                      <p className="text-sm text-muted-foreground">Scheduled maintenance</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-warning" />
+                      <span className="text-warning font-medium">Maintenance</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
 
           {/* System Development Tab */}
           <TabsContent value="system-development" className="space-y-6">
+            {/* Stats Cards */}
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <Card className="glass-card">
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">Active Projects</CardTitle>
+                  <Code className="h-5 w-5 text-primary" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">12</div>
+                  <p className="text-xs text-muted-foreground mt-1">In development</p>
+                </CardContent>
+              </Card>
+
+              <Card className="glass-card">
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">Code Reviews</CardTitle>
+                  <CheckCircle2 className="h-5 w-5 text-success" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-success">98%</div>
+                  <p className="text-xs text-muted-foreground mt-1">Compliance rate</p>
+                </CardContent>
+              </Card>
+
+              <Card className="glass-card">
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">Test Coverage</CardTitle>
+                  <Shield className="h-5 w-5 text-info" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold">82%</div>
+                  <p className="text-xs text-success mt-1">↑ 5% from last month</p>
+                </CardContent>
+              </Card>
+
+              <Card className="glass-card">
+                <CardHeader className="flex flex-row items-center justify-between pb-2">
+                  <CardTitle className="text-sm font-medium">Pending Deployments</CardTitle>
+                  <Clock className="h-5 w-5 text-warning" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-3xl font-bold text-warning">5</div>
+                  <p className="text-xs text-muted-foreground mt-1">Awaiting approval</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* SDLC Phase Tracking */}
             <Card className="glass-card">
               <CardHeader>
-                <CardTitle>System Development Lifecycle</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <Code className="h-5 w-5 text-primary" />
+                  SDLC Phase Tracking
+                </CardTitle>
               </CardHeader>
-              <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-                <Code className="h-16 w-16 text-muted-foreground mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Coming Soon</h3>
-                <p className="text-muted-foreground max-w-md">
-                  Track SDLC compliance, code review requirements, and testing documentation.
-                </p>
+              <CardContent>
+                <ScrollArea className="h-[300px]">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="hover:bg-transparent">
+                        <TableHead>Project</TableHead>
+                        <TableHead>Phase</TableHead>
+                        <TableHead>Code Review</TableHead>
+                        <TableHead>Security Scan</TableHead>
+                        <TableHead>Test Status</TableHead>
+                        <TableHead>UAT</TableHead>
+                        <TableHead>Deployment</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-medium">Payment Gateway v2.1</TableCell>
+                        <TableCell><Badge variant="outline" className="bg-info/10 text-info border-info/30">Testing</Badge></TableCell>
+                        <TableCell><CheckCircle2 className="h-4 w-4 text-success" /></TableCell>
+                        <TableCell><CheckCircle2 className="h-4 w-4 text-success" /></TableCell>
+                        <TableCell><Badge className="bg-success">Passed</Badge></TableCell>
+                        <TableCell><Clock className="h-4 w-4 text-warning" /></TableCell>
+                        <TableCell><span className="text-muted-foreground">Pending</span></TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Customer Portal Redesign</TableCell>
+                        <TableCell><Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">Development</Badge></TableCell>
+                        <TableCell><Clock className="h-4 w-4 text-warning" /></TableCell>
+                        <TableCell><span className="text-muted-foreground">-</span></TableCell>
+                        <TableCell><span className="text-muted-foreground">-</span></TableCell>
+                        <TableCell><span className="text-muted-foreground">-</span></TableCell>
+                        <TableCell><span className="text-muted-foreground">Q2 2026</span></TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">API Security Enhancement</TableCell>
+                        <TableCell><Badge variant="outline" className="bg-success/10 text-success border-success/30">Production</Badge></TableCell>
+                        <TableCell><CheckCircle2 className="h-4 w-4 text-success" /></TableCell>
+                        <TableCell><CheckCircle2 className="h-4 w-4 text-success" /></TableCell>
+                        <TableCell><Badge className="bg-success">Passed</Badge></TableCell>
+                        <TableCell><CheckCircle2 className="h-4 w-4 text-success" /></TableCell>
+                        <TableCell><Badge className="bg-success">Deployed</Badge></TableCell>
+                      </TableRow>
+                      <TableRow className="bg-warning/5">
+                        <TableCell className="font-medium">Data Migration Tool</TableCell>
+                        <TableCell><Badge variant="outline" className="bg-warning/10 text-warning border-warning/30">UAT</Badge></TableCell>
+                        <TableCell><CheckCircle2 className="h-4 w-4 text-success" /></TableCell>
+                        <TableCell><AlertTriangle className="h-4 w-4 text-warning" /></TableCell>
+                        <TableCell><Badge className="bg-warning text-warning-foreground">Issues</Badge></TableCell>
+                        <TableCell><Clock className="h-4 w-4 text-warning" /></TableCell>
+                        <TableCell><span className="text-muted-foreground">Delayed</span></TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Reporting Dashboard</TableCell>
+                        <TableCell><Badge variant="outline" className="bg-info/10 text-info border-info/30">Testing</Badge></TableCell>
+                        <TableCell><CheckCircle2 className="h-4 w-4 text-success" /></TableCell>
+                        <TableCell><CheckCircle2 className="h-4 w-4 text-success" /></TableCell>
+                        <TableCell><Badge className="bg-success">Passed</Badge></TableCell>
+                        <TableCell><Clock className="h-4 w-4 text-warning" /></TableCell>
+                        <TableCell><span className="text-muted-foreground">Feb 2026</span></TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </ScrollArea>
               </CardContent>
             </Card>
+
+            {/* Code Review & Deployment Pipeline */}
+            <div className="grid gap-6 md:grid-cols-2">
+              <Card className="glass-card">
+                <CardHeader>
+                  <CardTitle>Code Review Statistics</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
+                    <div>
+                      <p className="font-medium">Reviews Completed</p>
+                      <p className="text-sm text-muted-foreground">This month</p>
+                    </div>
+                    <span className="text-2xl font-bold">156</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
+                    <div>
+                      <p className="font-medium">Avg Review Time</p>
+                      <p className="text-sm text-muted-foreground">From submission</p>
+                    </div>
+                    <span className="text-2xl font-bold">4.2h</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
+                    <div>
+                      <p className="font-medium">First-Pass Approval Rate</p>
+                      <p className="text-sm text-muted-foreground">No revisions needed</p>
+                    </div>
+                    <span className="text-2xl font-bold text-success">78%</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                    <div>
+                      <p className="font-medium">Security Findings</p>
+                      <p className="text-sm text-muted-foreground">Identified in reviews</p>
+                    </div>
+                    <span className="text-2xl font-bold text-destructive">12</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="glass-card">
+                <CardHeader>
+                  <CardTitle>Deployment Pipeline</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-success/10 border border-success/20">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-success" />
+                      <div>
+                        <p className="font-medium">Production</p>
+                        <p className="text-sm text-muted-foreground">API Security v1.4.2</p>
+                      </div>
+                    </div>
+                    <Badge className="bg-success">Live</Badge>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-info/10 border border-info/20">
+                    <div className="flex items-center gap-3">
+                      <Clock className="h-5 w-5 text-info" />
+                      <div>
+                        <p className="font-medium">Staging</p>
+                        <p className="text-sm text-muted-foreground">Payment Gateway v2.1.0</p>
+                      </div>
+                    </div>
+                    <Badge variant="secondary">UAT</Badge>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-warning/10 border border-warning/20">
+                    <div className="flex items-center gap-3">
+                      <AlertTriangle className="h-5 w-5 text-warning" />
+                      <div>
+                        <p className="font-medium">QA Environment</p>
+                        <p className="text-sm text-muted-foreground">Data Migration Tool v3.0</p>
+                      </div>
+                    </div>
+                    <Badge variant="outline" className="text-warning border-warning">Issues</Badge>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-muted/30">
+                    <div className="flex items-center gap-3">
+                      <Code className="h-5 w-5 text-muted-foreground" />
+                      <div>
+                        <p className="font-medium">Development</p>
+                        <p className="text-sm text-muted-foreground">5 active branches</p>
+                      </div>
+                    </div>
+                    <Badge variant="outline">Active</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
         </Tabs>
 

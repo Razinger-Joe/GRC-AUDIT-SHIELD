@@ -10,12 +10,14 @@ import ITGeneralControls from "./pages/ITGeneralControls";
 import RiskAssessment from "./pages/RiskAssessment";
 import VulnerabilityManagement from "./pages/VulnerabilityManagement";
 import EvidenceManagement from "./pages/EvidenceManagement";
+import AuditTrail from "./pages/AuditTrail";
 import NotFound from "./pages/NotFound";
 import ReportingLayout from "./pages/reporting/ReportingLayout";
 import ReportingDashboard from "./pages/reporting/ReportingDashboard";
 import CustomReportBuilder from "./pages/reporting/CustomReportBuilder";
 import ScheduledReports from "./pages/reporting/ScheduledReports";
 import ReportHistory from "./pages/reporting/ReportHistory";
+import SecurityReportsPage from "./pages/reporting/SecurityReportsPage";
 import SettingsPage from "./pages/settings/SettingsPage";
 import SOCDashboard from "./pages/soc/SOCDashboard";
 
@@ -35,11 +37,13 @@ const App = () => (
           <Route path="/risk-assessment" element={<RiskAssessment />} />
           <Route path="/vulnerabilities" element={<VulnerabilityManagement />} />
           <Route path="/evidence" element={<EvidenceManagement />} />
+          <Route path="/audit-trail" element={<AuditTrail />} />
           <Route path="/reporting" element={<ReportingLayout />}>
             <Route index element={<ReportingDashboard />} />
             <Route path="custom" element={<CustomReportBuilder />} />
             <Route path="scheduled" element={<ScheduledReports />} />
             <Route path="history" element={<ReportHistory />} />
+            <Route path="security-reports" element={<SecurityReportsPage />} />
           </Route>
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/soc" element={<SOCDashboard />} />
@@ -52,3 +56,4 @@ const App = () => (
 );
 
 export default App;
+
