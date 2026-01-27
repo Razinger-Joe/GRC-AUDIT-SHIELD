@@ -1,7 +1,7 @@
-"""
-API client for frontend integration.
-Centralizes all API calls with authentication and error handling.
-"""
+/**
+ * API client for frontend integration.
+ * Centralizes all API calls with authentication and error handling.
+ */
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
 // Get API URL from environment or default to localhost
