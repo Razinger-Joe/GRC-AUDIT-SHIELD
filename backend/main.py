@@ -20,6 +20,11 @@ from .audit_trail.models import AuditLog
 # Import routers
 from .auth import router as auth_router
 from .compliance import router as compliance_router
+from .itgc import router as itgc_router
+from .risk import router as risk_router
+from .vulnerabilities import router as vulnerabilities_router
+from .evidence import router as evidence_router
+from .audit_trail import router as audit_router
 
 
 @asynccontextmanager
@@ -101,7 +106,11 @@ async def root():
 # Register routers
 app.include_router(auth_router)
 app.include_router(compliance_router)
-# Additional routers will be registered here as they're created
+app.include_router(itgc_router)
+app.include_router(risk_router)
+app.include_router(vulnerabilities_router)
+app.include_router(evidence_router)
+app.include_router(audit_router)
 
 
 if __name__ == "__main__":

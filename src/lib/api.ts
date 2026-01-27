@@ -99,6 +99,66 @@ export const api = {
             apiClient.patch(`/api/compliance/assessments/${id}`, data),
     },
 
+    // IT General Controls
+    itgc: {
+        getControls: (params?: { skip?: number; limit?: number }) =>
+            apiClient.get('/api/itgc/controls', { params }),
+
+        getControl: (id: number) =>
+            apiClient.get(`/api/itgc/controls/${id}`),
+
+        createControl: (data: any) =>
+            apiClient.post('/api/itgc/controls', data),
+
+        createTest: (data: any) =>
+            apiClient.post('/api/itgc/tests', data),
+
+        getControlTests: (controlId: number) =>
+            apiClient.get(`/api/itgc/controls/${controlId}/tests`),
+    },
+
+    // Risk Assessment
+    risk: {
+        getRisks: (params?: { skip?: number; limit?: number }) =>
+            apiClient.get('/api/risks/', { params }),
+
+        getRisk: (id: number) =>
+            apiClient.get(`/api/risks/${id}`),
+
+        createRisk: (data: any) =>
+            apiClient.post('/api/risks/', data),
+
+        updateRisk: (id: number, data: any) =>
+            apiClient.patch(`/api/risks/${id}`, data),
+
+        createMitigation: (data: any) =>
+            apiClient.post('/api/risks/mitigations', data),
+
+        getRiskMitigations: (riskId: number) =>
+            apiClient.get(`/api/risks/${riskId}/mitigations`),
+    },
+
+    // Vulnerabilities
+    vulnerabilities: {
+        getVulnerabilities: (params?: { skip?: number; limit?: number; status?: string }) =>
+            apiClient.get('/api/vulnerabilities/', { params }),
+
+        getVulnerability: (id: number) =>
+            apiClient.get(`/api/vulnerabilities/${id}`),
+
+        createVulnerability: (data: any) =>
+            apiClient.post('/api/vulnerabilities/', data),
+
+        updateVulnerability: (id: number, data: any) =>
+            apiClient.patch(`/api/vulnerabilities/${id}`, data),
+
+        createPatch: (data: any) =>
+            apiClient.post('/api/vulnerabilities/patches', data),
+
+        getVulnerabilityPatches: (vulnId: number) =>
+            apiClient.get(`/api/vulnerabilities/${vulnId}/patches`),
+    },
+
     // Evidence
     evidence: {
         upload: (formData: FormData) =>
