@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { AlertTriangle, Clock, Users, ArrowRight, MessageSquare, Shield, CheckCircle } from "lucide-react";
 
 const INCIDENTS = [
@@ -30,6 +31,12 @@ export const IncidentResponsePanel = () => {
 
             <ScrollArea className="h-48">
                 <div className="divide-y divide-slate-800">
+                    {INCIDENTS.length === 0 && (
+                        <div className="flex flex-col items-center justify-center h-40 text-slate-500 text-xs">
+                            <CheckCircle className="w-8 h-8 mb-2 opacity-50" />
+                            <p>No active incidents</p>
+                        </div>
+                    )}
                     {INCIDENTS.map(inc => (
                         <div key={inc.id} className="p-3 hover:bg-slate-900 cursor-pointer flex items-center justify-between group">
                             <div className="flex items-center gap-3">
@@ -51,9 +58,19 @@ export const IncidentResponsePanel = () => {
                             </div>
                             <div className="flex items-center gap-3">
                                 <Badge variant="secondary" className="bg-slate-800 text-slate-400 hover:bg-slate-700">{inc.status}</Badge>
-                                <Button size="icon" variant="ghost" className="h-6 w-6 text-slate-500 hover:text-white">
-                                    <ArrowRight className="w-4 h-4" />
-                                </Button>
+                                <TooltipProvider>
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                            <Button size="icon" variant="ghost" className="h-6 w-6 text-slate-500 hover:text-white">
+                                                <ArrowRight className="w-4 h-4" />
+                                                <span className="sr-only">View Details</span>
+                                            </Button>
+                                        </TooltipTrigger>
+                                        <TooltipContent side="left">
+                                            <p>View incident details</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>
                             </div>
                         </div>
                     ))}

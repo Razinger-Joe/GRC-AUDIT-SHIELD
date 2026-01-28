@@ -9,7 +9,8 @@ import {
     CartesianGrid,
     Tooltip,
     ResponsiveContainer,
-    Line
+    Line,
+    Legend
 } from "recharts";
 
 const complianceData = [
@@ -30,19 +31,58 @@ export const ComplianceTrendsChart = () => {
             </CardHeader>
             <CardContent className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={complianceData}>
+                    <AreaChart data={complianceData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                         <defs>
                             <linearGradient id="colorCompliance" x1="0" y1="0" x2="0" y2="1">
                                 <stop offset="5%" stopColor="#10b981" stopOpacity={0.8} />
                                 <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
                             </linearGradient>
                         </defs>
-                        <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip contentStyle={{ backgroundColor: "hsl(var(--card))", borderColor: "hsl(var(--border))" }} itemStyle={{ color: "hsl(var(--foreground))" }} />
-                        <Area type="monotone" dataKey="compliance" stroke="#10b981" fillOpacity={1} fill="url(#colorCompliance)" />
-                        <Line type="dashed" dataKey="target" stroke="#ef4444" strokeWidth={2} />
+                        <CartesianGrid strokeDasharray="3 3" className="stroke-muted/40" horizontal={true} vertical={false} />
+                        <XAxis
+                            dataKey="name"
+                            tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
+                            axisLine={false}
+                            tickLine={false}
+                        />
+                        <YAxis
+                            domain={[0, 100]}
+                            tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
+                            axisLine={false}
+                            tickLine={false}
+                            tickFormatter={(value) => `${value}%`}
+                        />
+                        <Tooltip
+                            contentStyle={{
+                                backgroundColor: "hsl(var(--popover))",
+                                borderColor: "hsl(var(--border))",
+                                borderRadius: "var(--radius)",
+                                color: "hsl(var(--popover-foreground))"
+                            }}
+                            itemStyle={{ color: "hsl(var(--popover-foreground))" }}
+                            formatter={(value: number, name: string) => [
+                                `${value}%`,
+                                name === 'compliance' ? 'Compliance Score' : 'Target Goal'
+                            ]}
+                        />
+                        <Legend wrapperStyle={{ paddingTop: '10px' }} />
+                        <Area
+                            type="monotone"
+                            name="Compliance Trend"
+                            dataKey="compliance"
+                            stroke="#10b981"
+                            fillOpacity={1}
+                            fill="url(#colorCompliance)"
+                        />
+                        <Line
+                            type="monotone"
+                            name="Target Goal"
+                            dataKey="target"
+                            stroke="#ef4444"
+                            strokeWidth={2}
+                            dot={false}
+                            strokeDasharray="5 5"
+                        />
                     </AreaChart>
                 </ResponsiveContainer>
             </CardContent>
