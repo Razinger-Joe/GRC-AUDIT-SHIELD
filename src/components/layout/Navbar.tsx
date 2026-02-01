@@ -26,7 +26,7 @@ export function Navbar() {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full glass-panel border-b border-white/5 shadow-sm">
       <div className="flex h-16 items-center px-4 lg:px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 mr-8">
