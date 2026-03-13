@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
-import { Save, Download, Layout, Trash2, GripVertical } from "lucide-react";
+import { Save, Download, Layout, Trash2, GripVertical, FileText } from "lucide-react";
 
 interface ReportCanvasProps {
     reportTitle: string;
@@ -88,8 +88,32 @@ export const ReportCanvas = ({
                                                             </div>
                                                         </div>
                                                         <h3 className="font-semibold mb-2">{widget.title}</h3>
-                                                        <div className="h-32 bg-muted/20 rounded flex items-center justify-center text-xs text-muted-foreground">
-                                                            {widget.type === 'chart' ? 'Chart Placeholder' : widget.type === 'table' ? 'Table Placeholder' : 'Content Placeholder'}
+                                                        <div className="h-32 bg-muted/10 rounded-md border border-dashed flex flex-col items-center justify-center text-xs text-muted-foreground">
+                                                            {widget.type === 'chart' ? (
+                                                                <div className="flex flex-col items-center gap-2">
+                                                                    <div className="flex items-end gap-1 h-8">
+                                                                        <div className="w-2 h-4 bg-primary/40 rounded-t"></div>
+                                                                        <div className="w-2 h-8 bg-primary/60 rounded-t"></div>
+                                                                        <div className="w-2 h-6 bg-primary/50 rounded-t"></div>
+                                                                        <div className="w-2 h-3 bg-primary/30 rounded-t"></div>
+                                                                    </div>
+                                                                    <span>Chart Preview</span>
+                                                                </div>
+                                                            ) : widget.type === 'table' ? (
+                                                                <div className="flex flex-col items-center gap-2 w-3/4">
+                                                                    <div className="w-full h-2 bg-muted-foreground/20 rounded"></div>
+                                                                    <div className="w-full h-2 bg-muted-foreground/10 rounded"></div>
+                                                                    <div className="w-full h-2 bg-muted-foreground/10 rounded"></div>
+                                                                    <span>Table Data View</span>
+                                                                </div>
+                                                            ) : (
+                                                                <div className="flex flex-col items-center gap-2 w-3/4">
+                                                                    <div className="w-full h-1.5 bg-muted-foreground/20 rounded"></div>
+                                                                    <div className="w-5/6 h-1.5 bg-muted-foreground/20 rounded"></div>
+                                                                    <div className="w-4/6 h-1.5 bg-muted-foreground/20 rounded"></div>
+                                                                    <span>Content Block</span>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 )}

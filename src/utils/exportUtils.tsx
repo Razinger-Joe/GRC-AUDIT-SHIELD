@@ -59,13 +59,11 @@ const PDFReport = ({ title, widgets }: PDFReportProps) => (
         <View key= { index } style = {{ marginBottom: 20 }}>
             <Text style={ styles.subtitle }> { widget.title } </Text>
                 < Text style = { styles.text } > Type: { widget.type } </Text>
-                    < Text style = { styles.text } >
-                    {
-                        widget.type === 'chart' ? '[Chart Visualization Placeholder]' :
-                            widget.type === 'table' ? '[Table Data Placeholder]' :
-                                '[Content Placeholder]'
-                    }
-                        </Text>
+                    <Text style={styles.text}>
+                        {widget.type === 'chart' ? '[Chart Visualization Will Appear Here]' :
+                         widget.type === 'table' ? '[Tabular Data View]' :
+                         '[Content Component]'}
+                    </Text>
                         </View>
                 ))}
 </View>
